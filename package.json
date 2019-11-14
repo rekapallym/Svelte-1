@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "materialize-css": "^1.0.0-rc.2",
-    "svelte-routing": "^1.4.0"
+    "svelte-routing": "^1.4.0",
+    "svelte-ui-button": "0.0.10",
+    "svelte-ui-theme": "0.0.13"
   }
 }

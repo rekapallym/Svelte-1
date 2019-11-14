@@ -1,22 +1,21 @@
 <script>
-import { onMount } from "svelte";
 
 import Display from './Display.svelte';
 
 let inputValue = '';
 let details =[];
-let data;
+
 let isLoading = false;
 
-// onMount(async () => {
-//     const res = await fetch('http://dummy.restapiexample.com/api/v1/employees');
-//     data = await res.json();
-//     console.log(data)
-//   });
+
+
   
 function click(){
 
-    isLoading = true;
+     if (isNaN(inputValue)){
+       alert("Enter a numeric number")
+    } else{
+      isLoading = true;
     fetch('http://dummy.restapiexample.com/api/v1/employee/' + `${inputValue}`)
     .then(res => {
         isLoading = false;
@@ -28,44 +27,40 @@ function click(){
     .then(data =>{
         details = Object.values(data)
         console.log(details)
-        });
+        })
+    .catch(err => {
+        console.log(err);
+    });
+
+    }
+
+    
+    
+    
 //   .then(response => response.json())
 //   .then(json => console.log(json))
 //   .then(json => JSON.parse(json) )
 //   .catch(error=> console.log(error))
 }
 
-
 </script>
+
+<style>
+
+</style>
+
 <div class="row">
-<p>Please Enter Employee ID</p>
+<h6>Please Enter Employee ID</h6>
 <input type="text" bind:value="{inputValue}" />
-<button on:click={click} >Click Me</button>
+<button class="waves-effect waves-light btn-large" type="submit" name="action" on:click={click} >Submit</button>
 </div>
 
 {#if isLoading}
-  <p>Loading...</p>
+  <div class="progress">
+      <div class="indeterminate"></div>
+  </div>
 {:else}
-        <table>
-        <thead>
-          <tr>
-              <th>Employee ID</th>
-              <th>Employee Name</th>
-              <th>Employee Salary</th>
-          </tr>
-        </thead>
-        {#if details != ""}
-        <tbody>
-          <tr>
-           <!-- {#each details as detail} -->
-            <td>{details[0]}</td>
-            <td>{details[1]}</td>
-            <td>{details[2]}</td> 
-              <!-- {/each} -->
-          </tr>
-        </tbody>
-        {/if}
-      </table>
+<Display {details} />
 {/if}
 
 
@@ -93,3 +88,4 @@ function click(){
       <li>{detail}</li>
     {/each}
   </ul> -->
+

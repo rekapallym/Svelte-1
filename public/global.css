@@ -59,3 +59,10 @@ button:active {
 button:focus {
 	border-color: #666;
 } */
+
+
+body {
+	background-color: #ffe7d1;
+	margin: 0;
+	
+}
